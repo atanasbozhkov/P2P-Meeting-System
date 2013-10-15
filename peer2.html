@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head> 
+
+<title> Peer 2 </title>
+<script type="text/javascript" src="peer.js"></script>
+
+<script type="text/javascript">
+	
+	var peer = new Peer('second', {key: '5jrhcy14ieezh0k9'});
+	peer.on('connection', function(conn) {
+  		conn.on('data', function(data){
+    	// Will print 'hi!'
+    	console.log(data);
+  });
+});
+</script>
+</head>
+
+<body> 
+
+Hello there
+
+</body>
+
+</html>
