@@ -1,3 +1,5 @@
-<strong>&copy; 2013</strong>
-</body>
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
 </html>
