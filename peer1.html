@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head> 
+
+<title> Honours Project </title>
+<script type="text/javascript" src="peer.js"></script>
+
+<script type="text/javascript">
+	
+	var peer = new Peer('first', {key: '5jrhcy14ieezh0k9'});
+	var conn = peer.connect('second');
+	conn.on('open', function(){
+		conn.send('WOW!');
+	});
+</script>
+</head>
+
+<body> 
+
+Hello there
+
+</body>
+
+</html>
