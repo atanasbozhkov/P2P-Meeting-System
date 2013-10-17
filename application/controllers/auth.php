@@ -1,6 +1,6 @@
 <?php
 
-class Login extends CI_Controller
+class Auth extends CI_Controller
 {
 	public function __construct()
 	{
@@ -31,17 +31,44 @@ class Login extends CI_Controller
 			$data['opertaion'] = 'Loggin in';
 			$rows = $this->user_model->check_user();
 			if ($rows == 1) {
-				$data['message'] = 'Woop';
-				$data['rows'] =  $rows;
+				$data['message'] = 'Login successful';
 				$this->load->view('users/success',$data);
 			} else {
 				$data['message'] = 'Username or password not matching. Please try again';
-				$data['rows'] =  $rows;
 				$this->load->view('users/login',$data);
 			}
 			
 		}
 
+
+	}
+
+	public function register()
+	{
+
+		$data['title'] = 'Register';
+		//Load the form helper and the form validation library.
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('username','Email','required');
+		$this->form_validation->set_rules('password','Password','required');
+		$this->form_validation->set_rules('repeat','Repeat pass','required');
+
+		if ($this->form_validation->run() ===  FALSE) 
+		{
+			
+			$this->load->view('templates/header',$data);
+			$this->load->view('users/register',$data);
+			$this->load->view('templates/footer');
+
+		} else
+		{
+			$data['opertaion'] = 'Creating user';
+			$this->user_model->create_user();
+			$data['message'] = 'Registration successeful';
+			$this->load->view('users/success',$data);
+		}
 
 	}
 }

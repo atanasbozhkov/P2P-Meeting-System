@@ -39,8 +39,8 @@
 */
 
 $route['users/(:any:)'] = 'users/$1';
-$route['register'] = 'register';
-$route['login'] = 'login';
+$route['register'] = 'auth/register';
+$route['login'] = 'auth';
 $route['news/create'] = 'news/create';
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';

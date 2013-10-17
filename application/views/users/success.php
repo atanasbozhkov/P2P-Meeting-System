@@ -1,5 +1,6 @@
 <?php
-echo 'Rows:'.$rows;
-echo 'Message'.$message;
+if (isset($message)) 
+{
+	echo $message;
+}
 ?>
-User Registered
