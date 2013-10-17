@@ -41,6 +41,8 @@
 $route['users/(:any:)'] = 'users/$1';
 $route['register'] = 'auth/register';
 $route['login'] = 'auth';
+$route['index.php'] = 'main';
+$route['meetings'] = 'main/meetings';
 $route['logout'] = 'auth/logout';
 $route['news/create'] = 'news/create';
 $route['news/(:any)'] = 'news/view/$1';
