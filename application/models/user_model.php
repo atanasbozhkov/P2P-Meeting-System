@@ -27,8 +27,12 @@ class User_model extends CI_Model
 		// die();
 		$query = $this->db->query($sql);
 		foreach( $query->result() as $result ){
-			return $result->count;
+			if ($result->count == 1) {
+				$this->session->set_userdata('username',$data['username']);
+				return true;
+			};
 		}
+		return false;
 		
 	}
 }

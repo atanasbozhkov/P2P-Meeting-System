@@ -29,10 +29,10 @@ class Auth extends CI_Controller
 		} else
 		{
 			$data['opertaion'] = 'Loggin in';
-			$rows = $this->user_model->check_user();
-			if ($rows == 1) {
-				$data['message'] = 'Login successful';
-				$this->load->view('users/success',$data);
+			$result = $this->user_model->check_user();
+			if ($result == true) {
+				$data['message'] = 'Login successful '.$this->session->userdata('username');
+				redirect('/', 'refresh');
 			} else {
 				$data['message'] = 'Username or password not matching. Please try again';
 				$this->load->view('users/login',$data);
@@ -67,8 +67,22 @@ class Auth extends CI_Controller
 			$data['opertaion'] = 'Creating user';
 			$this->user_model->create_user();
 			$data['message'] = 'Registration successeful';
-			$this->load->view('users/success',$data);
+			$this->load->view('templates/header',$data);
+			$this->load->view('users/login',$data);
+			$this->load->view('templates/footer');
+			// $data['message'] = 'Registration successeful';
+			// $this->load->view('users/success',$data);
+
 		}
+
+	}
+
+	public function logout()
+	{
+		session_start();
+		$this->session->unset_userdata('username');
+	   	session_destroy();
+	   	redirect('/', 'refresh');
 
 	}
 }

@@ -1,4 +1,8 @@
-
+<?php
+  if (isset($message)) {
+    echo '<div style="width:500px;margin:0 auto;"><h3>Registration Succsessful. Please login</h3></div>';
+  }
+?>
 <div class="container">
 <div class='header'>
 <h1> Login </h1>

@@ -14,9 +14,15 @@
             <li><a href="#contact">Meetings</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-                <li><?php if (!isset($username)) {
+                <li>
+                <?php if (!isset($username)) 
+                {
                 	echo '<a href="/login">Log In</a></li> <li><a href="/register">Sign Up</a></li>';
-                }?></li>
+                }else {
+                	echo '<a href="/profile">'.$username.'</a></li>';
+                	echo '<li><a href="/logout">Logout</a></li>';
+                }
+                ?></li>
           </ul>
         </div><!--/.navbar-collapse -->
       </div>
