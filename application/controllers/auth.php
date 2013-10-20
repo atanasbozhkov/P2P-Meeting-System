@@ -34,9 +34,10 @@ class Auth extends CI_Controller
 				$data['message'] = 'Login successful '.$this->session->userdata('username');
 				redirect('/', 'refresh');
 			} else {
-				$data['message'] = 'Username or password not matching. Please try again';
+				$data['message'] = 'Username or password not matching.<br/> Please try again';
+				$this->load->view('templates/header',$data);
 				$this->load->view('users/login',$data);
-			}
+				$this->load->view('templates/footer');			}
 			
 		}
 

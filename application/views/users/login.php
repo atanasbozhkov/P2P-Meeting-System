@@ -1,6 +1,6 @@
 <?php
   if (isset($message)) {
-    echo '<div style="width:500px;margin:0 auto;"><h3>Registration Succsessful. Please login</h3></div>';
+    echo '<div style="width:500px;margin:0 auto;"><h3>'.$message.'</h3></div>';
   }
 ?>
 <div class="container">

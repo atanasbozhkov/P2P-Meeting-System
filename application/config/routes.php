@@ -37,9 +37,10 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
+$route['api/meetings/new'] = 'api/meeting_new';
 $route['users/(:any:)'] = 'users/$1';
 $route['register'] = 'auth/register';
+$route['test'] = 'main/test';
 $route['login'] = 'auth';
 $route['index.php'] = 'main';
 $route['meetings'] = 'main/meetings';
