@@ -31,6 +31,7 @@ class Auth extends CI_Controller
 			$data['opertaion'] = 'Loggin in';
 			$result = $this->user_model->check_user();
 			if ($result == true) {
+				$this->user_model->update_last_seen($this->session->userdata('username'));
 				$data['message'] = 'Login successful '.$this->session->userdata('username');
 				redirect('/', 'refresh');
 			} else {

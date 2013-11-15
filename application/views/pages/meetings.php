@@ -1,10 +1,10 @@
   <script type="text/javascript">
     $(document).ready(function() {
         var request = $.ajax({
-        url: "/",
+        url: "/api/meetings/get/latest",
         context: document.body
         }).done(function() {
-            // console.log(request.responseText);
+            console.log('The lastest meeting list has hash of:'+request.responseText);
         })
         //End of AJAX Request
         $(function() {

@@ -37,8 +37,8 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$route['api/meetings/new'] = 'api/meeting_new';
-$route['users/(:any:)'] = 'users/$1';
+$route['api/(:any)'] = 'api'; // Redirect to the API Controller. It will deal with requests.
+$route['api'] = 'api'; // Redirect to the API Controller. It will deal with requests.
 $route['register'] = 'auth/register';
 $route['test'] = 'main/test';
 $route['login'] = 'auth';
@@ -50,6 +50,6 @@ $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = 'main';
-
+$route['404_override'] = '';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

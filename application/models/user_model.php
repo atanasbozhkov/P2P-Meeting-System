@@ -16,6 +16,23 @@ class User_model extends CI_Model
 		return $this->db->insert('users',$data);
 	}
 
+	public function update_last_seen($username)
+	{
+		$sql = "UPDATE  users SET  last_seen =  '".date('Y-m-d H:i:s')."' WHERE  username = '".$username."'";
+		$query = $this->db->query($sql);
+	}
+
+	public function get_online_users()
+	{
+		$sql = "SELECT username from users WHERE last_seen > NOW() - INTERVAL 10 MINUTE";
+		$query = $this->db->query($sql);
+		$usernames = array();
+		foreach( $query->result() as $result )
+		{
+			array_push($usernames, $result->username);
+		}
+		return $usernames;
+	}
 	public function check_user()
 	{
 		$data = array(

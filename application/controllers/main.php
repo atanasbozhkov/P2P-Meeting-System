@@ -23,6 +23,12 @@ class Main extends CI_Controller
 			redirect('/login','location',301);
 		}
 
+		//Get the online users from the API controller and remove the current user from them.
+		$result= json_decode(file_get_contents(site_url('api/users/get/online')));
+		// echo $result;
+		// echo gettype($result);	
+		$normalised = array_diff($result, array($data['username']));
+		$data['peers'] = $normalised;
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/menu', $data);
@@ -35,9 +41,14 @@ class Main extends CI_Controller
 
 	private function logged_in()
 	{
+		$this->load->model('user_model');
 		if (!$this->session->userdata('username')) 
 		{
 				redirect('/', 'location', 301);
+		} else
+		{
+			// print_r($this->user_model->get_online_users());
+			$this->user_model->update_last_seen($this->session->userdata('username'));
 		}
 	}
 
