@@ -6,9 +6,6 @@
         <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
       </div>
     </div>
-    <?php 
-    print_r($peers);
-    ?>
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
