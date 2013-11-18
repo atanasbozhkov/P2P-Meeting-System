@@ -110,8 +110,8 @@ class Api extends CI_Controller
 		} else if($request == 'get')
 		{
 			if ($args == 'latest') {
-				//TODO rig this to point to the real file.
-				echo "9aac";
+				$this->load->model('meetings_model');
+				echo $this->meetings_model->get_latest_hash();
 			}
 
 		} else if ($request == '')

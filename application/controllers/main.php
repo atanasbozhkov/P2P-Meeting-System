@@ -82,8 +82,10 @@ class Main extends CI_Controller
 		//Proceed loading the page views
 		$data['username'] = $this->session->userdata('username');
 		$data['title'] = 'Meetigns';
-		
-		$this->load->view('templates/header2', $data);
+		echo 'wat<br/>';
+		$this->load->model('meetings_model');
+		print_r($this->meetings_model->get_latest_hash());
+		// $this->load->view('templates/header', $data);
 		// $this->load->view('templates/menu', $data);
 		// $this->load->view('pages/meetings', $data);
 		// $this->load->view('templates/footer');
