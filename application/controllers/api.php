@@ -112,6 +112,9 @@ class Api extends CI_Controller
 			if ($args == 'latest') {
 				$this->load->model('meetings_model');
 				echo $this->meetings_model->get_latest_hash();
+			} else if ($args == 'list') {
+				$this->load->model('meetings_model');
+				echo json_encode($this->meetings_model->get_list());
 			}
 
 		} else if ($request == '')

@@ -24,7 +24,7 @@ class User_model extends CI_Model
 
 	public function get_online_users()
 	{
-		$sql = "SELECT username from users WHERE last_seen > NOW() - INTERVAL 10 MINUTE";
+		$sql = "SELECT username from users WHERE last_seen > NOW() - INTERVAL 1 MINUTE";
 		$query = $this->db->query($sql);
 		$usernames = array();
 		foreach( $query->result() as $result )

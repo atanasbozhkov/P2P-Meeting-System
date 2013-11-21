@@ -16,7 +16,6 @@ class Meetings_model extends CI_Model
 		return $this->db->insert('users',$data);
 	}
 
-
 	public function get_latest_meeting()
 	{
 		$sql = "SELECT * FROM meetings ORDER BY id DESC LIMIT 1";
@@ -35,6 +34,18 @@ class Meetings_model extends CI_Model
 		{
 			return $result->hash;
 		}
+	}
+
+	//TODO: implement DHT 
+	public function get_list()
+	{
+		$sql = "SELECT * from meetings";
+		$query = $this->db->query($sql);
+		$return = array();
+		foreach ($query->result() as $result) {
+			array_push($return, $result);
+		}
+		return $return;
 	}
 }
 
