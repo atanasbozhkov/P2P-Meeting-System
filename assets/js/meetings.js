@@ -1,6 +1,6 @@
 $(document).ready(function() {
         //On document ready ask for latest meeting file
-        //TODO Implement no peers case
+        //[todo] - Implement no peers case
         // var request = $.ajax({
         // url: "/api/meetings/get/latest",
         // context: document.body

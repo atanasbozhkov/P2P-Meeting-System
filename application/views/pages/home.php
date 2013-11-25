@@ -2,7 +2,8 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Why P2P?</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p>Scaling: Create system whose capacity grows with # of clients - automatically! It's Self-managing
+– This aspect attractive for corporate/datacenter needs – e.g. Amazon's 100,000 machines, google's 300k+. Harness lots of “spare” capacity at end-hosts.</p>
         <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
       </div>
     </div>

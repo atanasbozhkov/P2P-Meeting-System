@@ -1,0 +1,33 @@
+# watson rc
+# watson - inline issue manager
+# [goosecode] labs 
+
+
+# Directories 
+[dirs] 
+./application/controllers/
+./application/models/
+./application/views/
+./assets/
+
+# Tags 
+[tags] 
+fix
+review
+todo
+
+
+# Ignores
+[ignore]
+.git
+*.swp
+
+
+[github_api]
+529ffa73fc5fb215127d9a478901958102922c75
+
+
+[github_repo]
+atanasbozhkov/P2P-Meeting-System
+
+

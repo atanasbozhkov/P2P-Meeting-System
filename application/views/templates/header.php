@@ -10,6 +10,7 @@
     <script type="text/javascript" src="<?php echo asset_url('peer.js','js');?>"></script>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>    <script type="text/javascript">
     var user = '<?php echo sha1($username);?>';
+    //[todo] - make a case for incompatible browsers
     var peer = new Peer(user, {key: '5jrhcy14ieezh0k9', debug: 1});
     var meetings = undefined;
     var version  = undefined;
@@ -48,7 +49,7 @@
           conn.send({'get':version});
         });
         conn.on('data', function(data){
-          // Will print 'hi!'
+          //[todo] - Add a case for when a user does not have the current version.
           console.log('Got a response from peer. Meetings are now available');
           console.log(data);
           meetings = data;
@@ -58,7 +59,8 @@
     //Now query the user for the latest version of the list
     peer.on('connection', function(conn) {
       conn.on('data', function(data){
-        // Will print 'hi!'
+        //Connection from peer.
+        // Add check for old version.
         console.log('Got a connection');
         console.log(data);
         console.log(data['get']);
@@ -67,7 +69,11 @@
           console.log('Peer has requested the current meeting list');
           conn.send(meetings);
           console.log('Meeting list sent');
-        };
+        } else {
+          console.log('Peer has requested a different meeting list. Perhaps newer?');
+          // [review] - Protocol for different versions.
+          conn.send(0)
+        }
       });
     });
     </script>
@@ -89,7 +95,13 @@
   <?php 
   if (isset($peers)) 
   {
+    echo "[DEBUG] Online peers:";
+    //Dat check..
+    if ($peers == "[]") {
+      echo "None";
+    } else{
     print_r($peers);
+    }
   } 
 
   ?>

@@ -6,7 +6,7 @@ class Meetings_model extends CI_Model
 	{
 		$this->load->database();
 	}
-	//TODO: implement meeting push
+	//[todo] - implement meeting push
 	public function push_meeting()
 	{
 		$data = array(
@@ -36,7 +36,7 @@ class Meetings_model extends CI_Model
 		}
 	}
 
-	//TODO: implement DHT 
+	//[todo] - implement DHT 
 	public function get_list()
 	{
 		$sql = "SELECT * from meetings";

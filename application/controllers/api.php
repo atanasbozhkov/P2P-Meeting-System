@@ -1,7 +1,6 @@
 <?php
-/**
- *  TODO: Add multiple checks for user(s) meeting(s)
- **/
+
+ //[todo] - Add multiple checks for user(s) meeting(s)
 class Api extends CI_Controller 
 {
 	public function index()
