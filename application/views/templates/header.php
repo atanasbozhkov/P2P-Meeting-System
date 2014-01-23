@@ -8,6 +8,7 @@
     <script src="<?php echo asset_url('jquery.js','js');?>"></script>
     <title><?php echo $title ?></title>
     <script type="text/javascript" src="<?php echo asset_url('peer.js','js');?>"></script>
+    <script type="text/javascript" src="<?php echo asset_url('dht.js','js');?>"></script>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>    <script type="text/javascript">
     var user = '<?php echo sha1($username);?>';
     //[todo] - make a case for incompatible browsers
@@ -29,7 +30,7 @@
     //Pick a random person from the array and try to get the list from them
     var rand = peers[Math.floor(Math.random() * peers.length)];
     //Check wether we have any users.
-    if (typeof(rand)=="undefined") 
+    if (typeof(rand)=="undefined")
       {
         //We have no users present - query the server.
         console.log('No peers present. Querying the server for data.');
@@ -64,7 +65,7 @@
         console.log('Got a connection');
         console.log(data);
         console.log(data['get']);
-        if (data['get'] == version) 
+        if (data['get'] == version)
         {
           console.log('Peer has requested the current meeting list');
           conn.send(meetings);
@@ -77,7 +78,16 @@
       });
     });
     </script>
-
+    <script type="text/javascript">
+    //Debug
+    var myNodeID = hexToBytes(CryptoJS.SHA1(peer.id).toString());
+    console.log('My nodeID is:'+ myNodeID)
+    //Create a routing Table for DHT
+    var rt = NewRoutingTable(myNodeID);
+    for (var i = 0; i < peers.length; i++) {
+      Update(peers[i],rt);
+    };
+    </script>
     <!-- Bootstrap core CSS -->
     <link href="<?php echo asset_url('bootstrap.css','css');?>" rel="stylesheet">
 
@@ -92,8 +102,8 @@
 
   <body>
   <br/><br/><br/>
-  <?php 
-  if (isset($peers)) 
+  <?php
+  if (isset($peers))
   {
     echo "[DEBUG] Online peers:";
     //Dat check..
@@ -102,6 +112,6 @@
     } else{
     print_r($peers);
     }
-  } 
+  }
 
   ?>

@@ -39,7 +39,7 @@
   <!-- Textarea -->
   <div class="form-group">
     <label class="control-label" for="notes">Notes</label>
-    <div class="controls">                     
+    <div class="controls">
       <textarea id="notes" name="notes" class="form-control" >
   </textarea>
     </div>
