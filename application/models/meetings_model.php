@@ -26,17 +26,39 @@ class Meetings_model extends CI_Model
 		}
 	}
 
+	public function get_all_hashes()
+	{
+		$sql = "SELECT  `hash` FROM  `meetings`";
+		$query = $this->db->query($sql);
+		foreach( $query->result() as $result )
+		{
+			return $result;
+		}
+	}
+
 	public function get_latest_hash()
 	{
 		$sql = "SELECT hash FROM meetings ORDER BY id DESC LIMIT 1";
 		$query = $this->db->query($sql);
-		foreach ($query->result() as $result) 
+		foreach ($query->result() as $result)
 		{
 			return $result->hash;
 		}
 	}
 
-	//[todo] - implement DHT 
+	public function get_user_meetings($user)
+	{
+		$sql = "SELECT name,date,location,manager,invitees,notes  FROM `meetings` WHERE `user` = '".$user."' OR `invitees` = '".$user."'";
+		$query = $this->db->query($sql);
+		$return = array();
+		foreach ($query->result() as $result)
+		{
+			array_push($return, $result);
+		}
+		return $return;
+	}
+
+	//[todo] - implement DHT
 	public function get_list()
 	{
 		$sql = "SELECT * from meetings";
@@ -46,6 +68,10 @@ class Meetings_model extends CI_Model
 			array_push($return, $result);
 		}
 		return $return;
+	}
+
+	public function post_meeting($data){
+    	return $this->db->insert('meetings',$data);
 	}
 }
 

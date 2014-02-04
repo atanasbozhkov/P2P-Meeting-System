@@ -1,7 +1,7 @@
 <?php
 
  //[todo] - Add multiple checks for user(s) meeting(s)
-class Api extends CI_Controller 
+class Api extends CI_Controller
 {
 	public function index()
 	{
@@ -26,7 +26,7 @@ class Api extends CI_Controller
 		//Check arguments for sanity.
 		$this->argumentCheck($arguments);
 
-		switch ($arguments[1]) 
+		switch ($arguments[1])
 		{
 			//Meeting Requested
 			case 'meetings':
@@ -36,7 +36,7 @@ class Api extends CI_Controller
 			//Users Requested
 			case 'users':
 				echo $this->users($arguments);
-				break;			
+				break;
 			//Default
 			default:
 				echo 'Error No Function Requested';
@@ -57,7 +57,7 @@ class Api extends CI_Controller
 		// echo count($arguments);
 		if (count($arguments) > 1)
 		{
-			if (count($arguments) == 2) 
+			if (count($arguments) == 2)
 			{
 				echo("Error Processing Request. No subfunction requested.");
 				die();
@@ -79,41 +79,56 @@ class Api extends CI_Controller
 	public function meetings($input)
 	{
 
-		if (count($input) == 3) 
+		if (count($input) == 3 && $input[2] != 'put')
 		{
 			echo "Arguments are missing.";
 			die();
 		}
 		//Placeholders
 		$request = $input[2];
-		$args = $input[3];
 
-		if ($request == 'put') 
+
+		if ($request == 'put')
 		{
-		
+			// print_r($this->input->post());
+			$this->load->model('meetings_model');
 			$name     = $this->input->post('name');
 			$date     = $this->input->post('date');
+			$manager  = $this->input->post('manager');
+			$user     = $this->input->post('user');
 			$location = $this->input->post('location');
 			$invitees = $this->input->post('invitees');
 			$notes    = $this->input->post('notes');
-
-			$output = array(
-				'name'     => sha1($name),
-				'date'     => sha1($date),
-				'location' => sha1($location),
-				'invitees' => sha1($invitees),
-				'notes'    => sha1($notes)
+			$hash 	  = sha1($name.$data.$manager.$user.$location.$invitees.$notes);
+			$data = array(
+				'name'     => $name,
+				'date'     => $date,
+				'manager'  => $manager,
+				'user'     => $user,
+				'location' => $location,
+				'invitees' => $invitees,
+				'notes'    => $notes,
+				'hash'     => $hash
 			 );
-			// echo 'hello';
-			return json_encode($output);
+			$this->meetings_model->post_meeting($data);
+
+			//pass the data to the model for insertion
+			// return json_encode($output);
 		} else if($request == 'get')
 		{
+			$args = $input[3];
 			if ($args == 'latest') {
 				$this->load->model('meetings_model');
 				echo $this->meetings_model->get_latest_hash();
 			} else if ($args == 'list') {
 				$this->load->model('meetings_model');
 				echo json_encode($this->meetings_model->get_list());
+			} else if ($args == 'all') {
+				$this->load->model('meetings_model');
+				echo json_encode($this->meetings_model->get_all_hashes());
+			} else if ($args == 'user') {
+				$this->load->model('meetings_model');
+				echo json_encode($this->meetings_model->get_user_meetings(rawurldecode($input[4])));
 			}
 
 		} else if ($request == '')
@@ -128,7 +143,7 @@ class Api extends CI_Controller
 	public function users($input)
 	{
 
-		if (count($input) == 3) 
+		if (count($input) == 3)
 		{
 			echo "Arguments are missing.";
 			die();
@@ -138,13 +153,13 @@ class Api extends CI_Controller
 		$args = $input[3];
 
 		if ($request == "get") {
-			
+
 			if ($args == "online") {
 				$this->load->model('user_model');
 				echo json_encode($this->user_model->get_online_users());
 			}
 		}
-		
+
 	}
 
 

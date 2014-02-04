@@ -140,6 +140,8 @@ function Update(node, table)
 }
 
 function copyToVector(bucket, target, vector){
+	//DEBUG
+	// if (bucket.length == 0) { console.log("da bucket gone yo")};
 	for (var i = 0; i < bucket.length; i++) {
 		console.log('copyToVector: The bucket is:'+bucket[i]);
 		console.log('copyToVector: The distance is: '+Xor(bucket[i], target))
@@ -150,25 +152,43 @@ function copyToVector(bucket, target, vector){
 
 function FindClosest (node,count, table){
 	var vector = [];
+	//DEBUG
 	console.log('Vector created')
 	bucket_num = PrefixLen(Xor(node, table.node));
+	//DEBUG
 	console.log('Bucket number is:'+bucket_num)
 	bucket = table.buckets[bucket_num];
+	//DEBUG
 	console.log('The bucket is:'+bucket)
 	copyToVector(bucket, node, vector);
+	//DEBUG
 	console.log('vector has been modified')
+	console.log(vector);
+	// If the bucket is empty -> return empty list
+	if (bucket.length == 0) {
+		//DEBUG
+		console.log('Bucket is empty, returning empty vec');
+		return [];
+	};
+
 	for (var i = 1; (bucket_num - i >= 0 || bucket_num + i < IdLenth * 8) && vector.length < count; i++) {
 		if (bucket_num - i >= 0) {
+			//DEBUG
+			console.log('First');
 			bucket = table.buckets[bucket_num - i];
 			copyToVector(bucket, node, vector);
 		};
-		if (bucket_num < IdLenth * 8) {
+		if (bucket_num < IdLenth * 8 - 1) {
+			//DEBUG
+			console.log('Second');
+			console.log(bucket_num+i)
 			bucket = table.buckets[bucket_num + i];
 			copyToVector(bucket, node, vector);
 		};
 	};
 	// vector.distance.sort(function(a,b){b-a});
 	// vector.contact.sort
+	console.log('wat')
 	vector.sort(function(a,b){bytesToHex(a.distance) -bytesToHex(b.distance)});
 	return vector;
 }
