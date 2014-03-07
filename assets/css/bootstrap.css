@@ -773,8 +773,11 @@ pre code {
 }
 
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
+  /*margin-right: -15px;*/
+  /*margin-left: -15px;*/
+  margin: 0 auto;
+  width: 950px;
+  text-align: center;
 }
 
 .row:before,

@@ -15,7 +15,9 @@
             { 
             	echo '<li><a href="/meetings">Meetings</a></li>';
         	} ?>
+        	
           </ul>
+
           <ul class="nav navbar-nav navbar-right">
                 <li>
                 <?php if (!isset($username)) 
@@ -28,5 +30,6 @@
                 ?></li>
           </ul>
         </div><!--/.navbar-collapse -->
+
       </div>
     </div>

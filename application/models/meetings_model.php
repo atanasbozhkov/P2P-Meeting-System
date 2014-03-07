@@ -48,7 +48,7 @@ class Meetings_model extends CI_Model
 
 	public function get_user_meetings($user)
 	{
-		$sql = "SELECT name,date,location,manager,invitees,notes  FROM `meetings` WHERE `user` = '".$user."' OR `invitees` = '".$user."'";
+		$sql = "SELECT id,name,date,location,manager,invitees,notes,status  FROM `meetings` WHERE `user` = '".$user."' OR `invitees` = '".$user."'";
 		$query = $this->db->query($sql);
 		$return = array();
 		foreach ($query->result() as $result)
@@ -58,7 +58,6 @@ class Meetings_model extends CI_Model
 		return $return;
 	}
 
-	//[todo] - implement DHT
 	public function get_list()
 	{
 		$sql = "SELECT * from meetings";
@@ -72,6 +71,18 @@ class Meetings_model extends CI_Model
 
 	public function post_meeting($data){
     	return $this->db->insert('meetings',$data);
+	}
+
+	public function update_meeting_status($id,$status){
+		$this->db->where('id', $id);
+		//Cosntruct an array element of the data
+		//that will be updated
+		$data = array(
+	               'status' => $status
+           	 );
+		//Update the table with the data.
+		$this->db->update('meetings', $data);
+
 	}
 }
 

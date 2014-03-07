@@ -1,10 +1,9 @@
-  <script type="text/javascript" src="<?php echo asset_url('meetings.js','js');?>">
-  </script>
-
+  <script type="text/javascript" src="<?php echo asset_url('meetings.js','js');?>"> </script>
   <script type="text/javascript">
 
     function pushMeeting () {
       console.log('Invoked');
+
       console.log(email);
       //Dirty little hack for getting the email to the database.
       document.getElementById('manager').value = email;
@@ -16,7 +15,7 @@
       for (var i = 0; i < invs.length; i++) {
         document.forms[0].invitees.value = invs[i];
         console.log($("#newMeeting").serialize());
-        $.post( "/api/meetings/put", $("#newMeeting").serialize(), function(data) { alert('Meeting created succsessfully.');});
+        $.post( "/api/meetings/put", $("#newMeeting").serialize(), function(data) { alert('Meeting created succsessfully.'); location.reload();});
       };
       //Push the meeting to the distance vector peers.
       for (var i = 0; i < closestToSelf.length; i++) {
@@ -34,16 +33,38 @@
         conn.on('data', function(data){
           //Finally - return the user's data
           console.log(data);
+
         });
     }
+	//location.reload();
+	//console.log('Tried to reload - I think we failed guys');
   }
   </script>
-	<br/><br/><br/>
 
+<style>
+
+  body {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    }
+
+  #calendar {
+    width: 900px;
+    float:left;
+    margin-left: 50px;
+    }
+
+</style>
+	<br/><br/><br/>
+  <div id='calendar'></div>
   <div id="meetings">
-Current meetings
   </div>
-  <div style='width:300px;margin:0 auto;'>
+  <div style='width:300px; float:left; margin-left:50px;'>
+  	<div id="notifications">
+  <legend>	Notifications </legend>
+  	</div>
   <form id="newMeeting">
   <fieldset>
 
