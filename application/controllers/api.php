@@ -131,6 +131,26 @@ class Api extends CI_Controller
 				echo json_encode($this->meetings_model->get_user_meetings(rawurldecode($input[4])));
 			}
 
+		
+		} else if ($request == 'setseen'){
+			$id 	= $input[3];
+			$status = $input[4];
+			//Check for sanity 
+			if($status != 1 && $status != 2 && $status != 3){
+				//Spit out an error
+				echo "Invalid value for `seen` status";
+				die();
+			}
+			//Set the seen status
+			$this->load->model('meetings_model');
+			//After we've loaded the model 
+			//we can set the seen status
+			//DEBUG
+			//echo "Our id is".$id."<br/>";
+			//echo  "Our status is ".$status;
+			//
+			$this->meetings_model->update_meeting_status($id,$status);
+			// [todo] Think about wether or not we have to return any response to the user.
 		} else if ($request == '')
 		{
 			echo "Something went wrong";
@@ -161,8 +181,6 @@ class Api extends CI_Controller
 		}
 
 	}
-
-
 
 
 }
